@@ -8,9 +8,8 @@ export abstract class Entity<T> {
   protected readonly _id: string;
   public props: T;
 
-  constructor(props: T, id?: string) {
+  constructor(id?: string) {
     this._id = id ? id : UniqueEntityID();
-    this.props = props;
   }
 
   public equals(object?: Entity<T>): boolean {

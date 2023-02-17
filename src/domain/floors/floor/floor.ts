@@ -6,8 +6,10 @@ export class Floor extends Entity<IFloorProps> {
   private _name: string;
   private _rooms?: Room[];
   private constructor(props: IFloorProps) {
-    const { id, ...data } = props;
-    super(data, id);
+    const { id } = props;
+    super(id);
+    this._name = props.name;
+    this._rooms = props.rooms;
   }
 
   public static create(props: IFloorProps): Floor {

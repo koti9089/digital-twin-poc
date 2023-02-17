@@ -6,8 +6,10 @@ export class Room extends Entity<IRoomProps> {
   private _name: string;
   private _iotDevices?: IotDevice[];
   private constructor(props: IRoomProps) {
-    const { id, ...data } = props;
-    super(data, id);
+    const { id } = props;
+    super(id);
+    this._name = props.name;
+    this._iotDevices = props.iotDevices;
   }
 
   public static create(props: IRoomProps): Room {

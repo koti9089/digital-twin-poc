@@ -7,8 +7,11 @@ export class Building extends Entity<IBuildingProps> {
   private _address: string;
   private _floors?: Floor[];
   private constructor(props: IBuildingProps) {
-    const { id, ...data } = props;
-    super(data, id);
+    const { id } = props;
+    super(id);
+    this._name = props.name;
+    this._address = props.address;
+    this._floors = props.floors;
   }
 
   public static create(props: IBuildingProps): Building {
