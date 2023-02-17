@@ -1,4 +1,3 @@
-import { Room } from 'src/domain/rooms/room/room';
 import { Entity } from '../../entity';
 import { IIotDeviceProps } from './iot_device.props';
 
