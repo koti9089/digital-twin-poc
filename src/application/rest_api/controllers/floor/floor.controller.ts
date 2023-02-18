@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { FloorRepository } from 'src/infrastructure/data_access/gremlin/repositories/floors.repository';
 
@@ -6,4 +6,9 @@ import { FloorRepository } from 'src/infrastructure/data_access/gremlin/reposito
 @Controller('floor')
 export class FloorController {
   constructor(private floorRepo: FloorRepository) {}
+
+  @Get('/ping')
+  getHello(): string {
+    return 'Pong';
+  }
 }

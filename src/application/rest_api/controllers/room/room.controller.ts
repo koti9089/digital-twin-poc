@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { RoomRepository } from 'src/infrastructure/data_access/gremlin/repositories/room.repository';
 
@@ -6,4 +6,9 @@ import { RoomRepository } from 'src/infrastructure/data_access/gremlin/repositor
 @Controller('room')
 export class RoomController {
   constructor(private roomRepo: RoomRepository) {}
+
+  @Get('/ping')
+  getHello(): string {
+    return 'Pong';
+  }
 }
