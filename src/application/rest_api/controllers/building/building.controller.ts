@@ -6,8 +6,8 @@ import { BuildingRepository } from 'src/infrastructure/data_access/gremlin/repos
 @Controller('building')
 export class BuildingController {
   constructor(private buidingRepo: BuildingRepository) {}
-  @Get('/ping')
-  async getHello(): Promise<string> {
+  @Get('/all')
+  async getAllBuildings(): Promise<string> {
     return 'Gets all buildings';
   }
 }

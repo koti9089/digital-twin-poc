@@ -5,6 +5,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BuildingModule } from './application/rest_api/controllers/building/building.module';
 import { GremlinService } from './infrastructure/data_access/gremlin/gremlin.service';
+import { FloorModule } from './application/rest_api/controllers/floor/floor.module';
+import { RoomModule } from './application/rest_api/controllers/room/room.module';
+import { IotDeviceModule } from './application/rest_api/controllers/iot_device/iot_device.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -12,6 +15,9 @@ import { GremlinService } from './infrastructure/data_access/gremlin/gremlin.ser
       envFilePath: '.env',
     }),
     BuildingModule,
+    FloorModule,
+    RoomModule,
+    IotDeviceModule,
   ],
   controllers: [AppController],
   providers: [
