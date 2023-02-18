@@ -17,10 +17,6 @@ export class BuildingController {
   async getAllBuildings() {
     console.log('Running');
     const buildings = await this.buidingRepo.getAllBuildings();
-    console.log(
-      '🚀 ~ file: building.controller.ts:20 ~ BuildingController ~ getAllBuildings ~ buildings',
-      buildings,
-    );
     return buildings;
   }
 
