@@ -11,7 +11,7 @@ export class FloorRepository {
   ) {}
 
   async createFloor(floor: Floor, buildingId: string) {
-    const buildingFound = await this.gremlinService._client.submit(
+    const buildingFound = await this.gremlinService.execute(
       "g.V('id', id).hasLabel('Building')",
       {
         id: buildingId,
@@ -21,7 +21,7 @@ export class FloorRepository {
       throw new ConflictException("Building doesn't exists");
     }
 
-    const floorFound = await this.gremlinService._client.submit(
+    const floorFound = await this.gremlinService.execute(
       "g.V('id', id).hasLabel('Floor')",
       {
         id: floor.name,
@@ -31,7 +31,7 @@ export class FloorRepository {
       throw new ConflictException('Floor already exists');
     }
 
-    const floorCreated = await this.gremlinService._client.submit(
+    const floorCreated = await this.gremlinService.execute(
       "g.addV(label).property('id', id).property('name', name).property('floorId', floorId).property('pk', 'pk')",
       {
         label: 'Floor',
@@ -43,7 +43,7 @@ export class FloorRepository {
 
     // make relations of floor with building
 
-    const edge = await this.gremlinService._client.submit(
+    await this.gremlinService.execute(
       "g.V(buildingId).hasLabel('Building').addE(relationship).to(g.V(floorId))",
       {
         buildingId: buildingId,
@@ -55,9 +55,7 @@ export class FloorRepository {
   }
 
   async getAllFloors() {
-    const floors = await this.gremlinService._client.submit(
-      "g.V().hasLabel('Floor')",
-    );
+    const floors = await this.gremlinService.execute("g.V().hasLabel('Floor')");
     const result = { _items: this.floorMapper.toDomain(floors) };
     return result;
   }

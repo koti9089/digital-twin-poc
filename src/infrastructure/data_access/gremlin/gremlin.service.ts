@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as Gremlin from 'gremlin';
+const DriverRemoteConnection = Gremlin.driver.DriverRemoteConnection;
+const Graph = Gremlin.structure.Graph;
 
 @Injectable()
 export class GremlinService {
@@ -8,7 +10,7 @@ export class GremlinService {
   private readonly _primaryKey: string;
   private readonly _database: string;
   private readonly _collection: string;
-  public readonly _client;
+  private readonly _client;
   constructor(private configService: ConfigService) {
     this._endpoint = configService.get<string>('COSMOS_GREMLIN_ENDPOINT');
     this._primaryKey = configService.get<string>('COSMOS_GREMLIN_PRIMARY_KEY');
@@ -23,5 +25,20 @@ export class GremlinService {
       rejectUnauthorized: true,
       mimeType: 'application/vnd.gremlin-v2.0+json',
     });
+  }
+
+  async execute(query, options = {}) {
+    const connection = new DriverRemoteConnection(this._endpoint, {
+      mimeType: 'application/vnd.gremlin-v2.0+json',
+      rejectUnauthorized: true,
+      authenticator: new Gremlin.driver.auth.PlainTextSaslAuthenticator(
+        `/dbs/${this._database}/colls/${this._collection}`,
+        this._primaryKey,
+      ),
+    });
+    // const graph = new Graph().traversal().withRemote(connection);
+    const result = await this._client.submit(query, options);
+    await connection.close();
+    return result;
   }
 }

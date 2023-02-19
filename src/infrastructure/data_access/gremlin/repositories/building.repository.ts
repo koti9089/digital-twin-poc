@@ -15,7 +15,7 @@ export class BuildingRepository {
   ) {}
 
   async createBuilding(building: Building) {
-    const found = await this.gremlinService._client.submit(
+    const found = await this.gremlinService.execute(
       "g.V('id', id).hasLabel('Building')",
       {
         id: building.name,
@@ -24,7 +24,7 @@ export class BuildingRepository {
     if (found._items.length > 0) {
       throw new ConflictException('Building already exists');
     }
-    const buildingCreated = await this.gremlinService._client.submit(
+    const buildingCreated = await this.gremlinService.execute(
       "g.addV(label).property('id', id).property('name', name).property('address', address).property('buildingId', buildingId).property('pk', 'pk')",
       {
         label: 'Building',
@@ -38,7 +38,7 @@ export class BuildingRepository {
   }
 
   async getBuilding(id: string) {
-    const building = await this.gremlinService._client.submit(
+    const building = await this.gremlinService.execute(
       "g.V('id', id).hasLabel('Building')",
       {
         id,
@@ -47,7 +47,7 @@ export class BuildingRepository {
     if (!building._items.length) {
       throw new NotFoundException('id not found');
     }
-    const floors = await this.gremlinService._client.submit(
+    const floors = await this.gremlinService.execute(
       "g.V('id', id).hasLabel('Building').out()",
       {
         id,
@@ -58,7 +58,7 @@ export class BuildingRepository {
   }
 
   async getAllBuildings() {
-    const buildings = await this.gremlinService._client.submit(
+    const buildings = await this.gremlinService.execute(
       "g.V().hasLabel('Building')",
     );
     const result = { _items: this.buildingMapper.toDomain(buildings) };
@@ -67,7 +67,7 @@ export class BuildingRepository {
 
   async deleteBuilding(id: string) {
     await this.getBuilding(id);
-    await this.gremlinService._client.submit(
+    await this.gremlinService.execute(
       "g.V('id', id).hasLabel('Building').drop()",
       {
         id,
