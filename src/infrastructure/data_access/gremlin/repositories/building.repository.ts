@@ -47,6 +47,13 @@ export class BuildingRepository {
     if (!building._items.length) {
       throw new NotFoundException('id not found');
     }
+    const floors = await this.gremlinService._client.submit(
+      "g.V('id', id).hasLabel('Building').out()",
+      {
+        id,
+      },
+    );
+    building.floors = floors;
     return this.buildingMapper.toDomain(building)[0];
   }
 

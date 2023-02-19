@@ -1,4 +1,5 @@
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
+import { FloorDto } from '../../floor/dtos/floor.dto';
 export class BuildingDto {
   @Expose()
   id: string;
@@ -8,4 +9,8 @@ export class BuildingDto {
 
   @Expose()
   address: string;
+
+  @Expose()
+  @Type(() => FloorDto)
+  floors?: FloorDto[];
 }
