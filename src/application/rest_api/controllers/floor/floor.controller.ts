@@ -2,7 +2,9 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Floor } from 'src/domain/floors/floor/floor';
 import { FloorRepository } from 'src/infrastructure/data_access/gremlin/repositories/floors.repository';
+import { Serialize } from 'src/infrastructure/interceptors/serialize.interceptor';
 import { CreateFloorDto } from './dtos/create-floor.dto';
+import { FloorDto } from './dtos/floor.dto';
 
 @ApiTags('Floor')
 @Controller('floor')
@@ -14,6 +16,7 @@ export class FloorController {
     return 'Pong';
   }
 
+  @Serialize(FloorDto)
   @Post()
   async createFloor(@Body() body: CreateFloorDto) {
     const floor = Floor.create(body);
