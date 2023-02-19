@@ -51,11 +51,14 @@ export class FloorRepository {
         relationship: 'has',
       },
     );
-    console.log(
-      '🚀 ~ file: floors.repository.ts:38 ~ FloorRepository ~ createFloor ~ edge',
-      edge,
-    );
     return this.floorMapper.toDomain(floorCreated)[0];
-    // return floorCreated;
+  }
+
+  async getAllFloors() {
+    const floors = await this.gremlinService._client.submit(
+      "g.V().hasLabel('Floor')",
+    );
+    const result = { _items: this.floorMapper.toDomain(floors) };
+    return result;
   }
 }

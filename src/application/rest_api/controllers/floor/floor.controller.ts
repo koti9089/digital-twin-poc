@@ -5,15 +5,18 @@ import { FloorRepository } from 'src/infrastructure/data_access/gremlin/reposito
 import { Serialize } from 'src/infrastructure/interceptors/serialize.interceptor';
 import { CreateFloorDto } from './dtos/create-floor.dto';
 import { FloorDto } from './dtos/floor.dto';
+import { AllFloorDto } from './dtos/get-all-floor.dto';
 
 @ApiTags('Floor')
 @Controller('floor')
 export class FloorController {
   constructor(private floorRepo: FloorRepository) {}
 
+  @Serialize(AllFloorDto)
   @Get('/all')
-  getHello(): string {
-    return 'Pong';
+  async getAllFloors() {
+    const floors = await this.floorRepo.getAllFloors();
+    return floors;
   }
 
   @Serialize(FloorDto)

@@ -15,7 +15,6 @@ export class BuildingController {
   @Serialize(AllBuildingDto)
   @Get('/all')
   async getAllBuildings() {
-    console.log('Running');
     const buildings = await this.buidingRepo.getAllBuildings();
     return buildings;
   }
