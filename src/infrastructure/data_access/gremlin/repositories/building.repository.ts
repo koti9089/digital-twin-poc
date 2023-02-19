@@ -22,7 +22,7 @@ export class BuildingRepository {
       },
     );
     if (found._items.length > 0) {
-      throw new ConflictException('Building aklready exists');
+      throw new ConflictException('Building already exists');
     }
     const buildingCreated = await this.gremlinService._client.submit(
       "g.addV(label).property('id', id).property('name', name).property('address', address).property('buildingId', buildingId).property('pk', 'pk')",
