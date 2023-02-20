@@ -28,7 +28,6 @@ export class GremlinService {
   }
 
   async execute(query: string, options = {}) {
-    console.log(this._endpoint);
     const connection = new DriverRemoteConnection(this._endpoint, {
       mimeType: 'application/vnd.gremlin-v2.0+json',
       rejectUnauthorized: true,
