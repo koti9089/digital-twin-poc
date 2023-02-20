@@ -26,9 +26,11 @@ export class iotDeviceRepository {
     }
 
     const iotDeviceFound = await this.gremlinService.execute(
-      "g.V('id', id).hasLabel('IotDevice')",
+      // "g.V('id', id).hasLabel('IotDevice')",
+      "g.V().has('Room', 'id', id).out('has').has('name', name)",
       {
-        id: iotDevice.name,
+        id: roomId,
+        name: iotDevice.name,
       },
     );
     if (iotDeviceFound._items.length > 0) {

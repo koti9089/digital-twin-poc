@@ -26,9 +26,12 @@ export class FloorRepository {
     }
 
     const floorFound = await this.gremlinService.execute(
-      "g.V('id', id).hasLabel('Floor')",
+      // "g.V('id', id).hasLabel('Floor')",
+      "g.V().has('Building', 'id', id).out('has').has('name', name)",
+
       {
-        id: floor.name,
+        id: buildingId,
+        name: floor.name,
       },
     );
     if (floorFound._items.length > 0) {
