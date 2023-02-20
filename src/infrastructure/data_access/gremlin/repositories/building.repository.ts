@@ -51,7 +51,7 @@ export class BuildingRepository {
       {
         cityId: cityId,
         buildingId: buildingId,
-        relationship: 'has',
+        relationship: 'hasBuilding',
       },
     );
 

@@ -52,7 +52,7 @@ export class StateRepository {
       {
         countryId: countryId,
         stateId: stateId,
-        relationship: 'has',
+        relationship: 'hasState',
       },
     );
     return this.stateMapper.toDomain(stateCreated)[0];

@@ -27,7 +27,7 @@ export class iotDeviceRepository {
 
     const iotDeviceFound = await this.gremlinService.execute(
       // "g.V('id', id).hasLabel('IotDevice')",
-      "g.V().has('Room', 'id', id).out('has').has('name', name)",
+      "g.V().has('Room', 'id', id).out('hasIotDevice').has('name', name)",
       {
         id: roomId,
         name: iotDevice.name,
@@ -54,7 +54,7 @@ export class iotDeviceRepository {
       {
         roomId: roomId,
         iotDeviceId: iotDeviceId,
-        relationship: 'has',
+        relationship: 'hasIotDevice',
       },
     );
     return this.iotDeviceMapper.toDomain(floorCreated)[0];

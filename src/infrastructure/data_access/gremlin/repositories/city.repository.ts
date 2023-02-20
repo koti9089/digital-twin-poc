@@ -53,7 +53,7 @@ export class CityRepository {
       {
         stateId: stateId,
         cityId: cityId,
-        relationship: 'has',
+        relationship: 'hasCity',
       },
     );
     return this.cityMapper.toDomain(cityCreated)[0];

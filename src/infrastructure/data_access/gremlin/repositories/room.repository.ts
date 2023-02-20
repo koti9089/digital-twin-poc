@@ -27,7 +27,7 @@ export class RoomRepository {
 
     const roomFound = await this.gremlinService.execute(
       // "g.V('id', id).hasLabel('Room')",
-      "g.V().has('Floor', 'id', id).out('has').has('name', name)",
+      "g.V().has('Floor', 'id', id).out('hasRoom').has('name', name)",
       {
         id: floorId,
         name: room.name,
@@ -55,7 +55,7 @@ export class RoomRepository {
       {
         floorId: floorId,
         roomId: roomId,
-        relationship: 'has',
+        relationship: 'hasRoom',
       },
     );
     return this.roomMapper.toDomain(roomCreated)[0];
