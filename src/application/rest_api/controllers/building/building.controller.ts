@@ -23,7 +23,7 @@ export class BuildingController {
   @Post()
   async createBuilding(@Body() body: CreateBuildingDto) {
     const building = Building.create(body);
-    const result = await this.buidingRepo.createBuilding(building);
+    const result = await this.buidingRepo.createBuilding(building, body.cityId);
     return result;
   }
 

@@ -14,7 +14,17 @@ export class BuildingRepository {
     private buildingMapper: BuildingMapper,
   ) {}
 
-  async createBuilding(building: Building) {
+  async createBuilding(building: Building, cityId: string) {
+    const cityFound = await this.gremlinService.execute(
+      "g.V('id', id).hasLabel('City')",
+      {
+        id: cityId,
+      },
+    );
+    if (!cityFound._items.length) {
+      throw new ConflictException("City doesn't exists");
+    }
+
     const found = await this.gremlinService.execute(
       "g.V('id', id).hasLabel('Building')",
       {
@@ -34,6 +44,16 @@ export class BuildingRepository {
         buildingId: building.id,
       },
     );
+
+    await this.gremlinService.execute(
+      "g.V(cityId).hasLabel('City').addE(relationship).to(g.V(buildingId).hasLabel('Building'))",
+      {
+        cityId: cityId,
+        buildingId: building.name,
+        relationship: 'has',
+      },
+    );
+
     return this.buildingMapper.toDomain(buildingCreated)[0];
   }
 

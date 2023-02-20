@@ -3,6 +3,14 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateBuildingDto {
   @ApiProperty({
+    description: 'Building must belong to some City',
+    default: 'Srinagar',
+  })
+  @IsString()
+  @MinLength(1)
+  cityId: string;
+
+  @ApiProperty({
     description: 'Building Name',
     default: 'luxura dreams',
   })
