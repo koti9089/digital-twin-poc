@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as Gremlin from 'gremlin';
 const DriverRemoteConnection = Gremlin.driver.DriverRemoteConnection;
-const Graph = Gremlin.structure.Graph;
+// const traversal = Gremlin.process.AnonymousTraversalSource.traversal;
 
 @Injectable()
 export class GremlinService {
@@ -27,7 +27,8 @@ export class GremlinService {
     });
   }
 
-  async execute(query, options = {}) {
+  async execute(query: string, options = {}) {
+    console.log(this._endpoint);
     const connection = new DriverRemoteConnection(this._endpoint, {
       mimeType: 'application/vnd.gremlin-v2.0+json',
       rejectUnauthorized: true,
@@ -36,7 +37,7 @@ export class GremlinService {
         this._primaryKey,
       ),
     });
-    // const graph = new Graph().traversal().withRemote(connection);
+    // const g = traversal().withRemote(connection);
     const result = await this._client.submit(query, options);
     await connection.close();
     return result;
