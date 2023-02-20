@@ -32,6 +32,11 @@
 $ npm install
 ```
 
+## Setup enviroment variables
+```bash
+cp .env.sample .env
+#open .env and set the variables
+```
 ## Running the app
 
 ```bash
