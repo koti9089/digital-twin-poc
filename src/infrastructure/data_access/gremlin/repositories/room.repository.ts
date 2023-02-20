@@ -48,7 +48,7 @@ export class RoomRepository {
     // make relations of floor with building
 
     await this.gremlinService.execute(
-      "g.V(floorId).hasLabel('Floor').addE(relationship).to(g.V(roomId))",
+      "g.V(floorId).hasLabel('Floor').addE(relationship).to(g.V(roomId).hasLabel('Room'))",
       {
         floorId: floorId,
         roomId: room.name,
