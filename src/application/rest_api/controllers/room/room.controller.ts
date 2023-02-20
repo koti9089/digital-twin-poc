@@ -14,14 +14,14 @@ export class RoomController {
 
   @Serialize(AllRoomDto)
   @Get('/all')
-  async getAllFloors() {
+  async getAllRooms() {
     const floors = await this.roomRepo.getAllRooms();
     return floors;
   }
 
   @Serialize(RoomDto)
   @Post()
-  async createFloor(@Body() body: CreateRoomDto) {
+  async createRoom(@Body() body: CreateRoomDto) {
     const room = Room.create(body);
     const result = await this.roomRepo.createRoom(room, body.floorId);
     return result;
@@ -29,12 +29,12 @@ export class RoomController {
 
   @Serialize(RoomDto)
   @Get('/:id')
-  async getBuilding(@Param('id') id: string) {
+  async getRoom(@Param('id') id: string) {
     return this.roomRepo.getRoom(id);
   }
 
   @Delete('/:id')
-  async deleteBuilding(@Param('id') id: string) {
+  async deleteRoom(@Param('id') id: string) {
     return this.roomRepo.deleteRoom(id);
   }
 }

@@ -14,14 +14,14 @@ export class IotDeviceController {
 
   @Serialize(AllIotDeviceDto)
   @Get('/all')
-  async getAllFloors() {
+  async getAllIotDevices() {
     const floors = await this.iotDeviceRepo.getAllIotDevices();
     return floors;
   }
 
   @Serialize(IotDeviceDto)
   @Post()
-  async createFloor(@Body() body: CreateIotDeviceDto) {
+  async createIotDevice(@Body() body: CreateIotDeviceDto) {
     const iotDevice = IotDevice.create(body);
     const result = await this.iotDeviceRepo.createIotDevice(
       iotDevice,
@@ -32,12 +32,12 @@ export class IotDeviceController {
 
   @Serialize(IotDeviceDto)
   @Get('/:id')
-  async getBuilding(@Param('id') id: string) {
+  async getIotDevice(@Param('id') id: string) {
     return this.iotDeviceRepo.getIotDevice(id);
   }
 
   @Delete('/:id')
-  async deleteBuilding(@Param('id') id: string) {
+  async deleteIotDevice(@Param('id') id: string) {
     return this.iotDeviceRepo.deleteIotDevice(id);
   }
 }

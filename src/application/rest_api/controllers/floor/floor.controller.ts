@@ -29,12 +29,12 @@ export class FloorController {
 
   @Serialize(FloorDto)
   @Get('/:id')
-  async getBuilding(@Param('id') id: string) {
+  async getFloor(@Param('id') id: string) {
     return this.floorRepo.getFloor(id);
   }
 
   @Delete('/:id')
-  async deleteBuilding(@Param('id') id: string) {
+  async deleteFloor(@Param('id') id: string) {
     return this.floorRepo.deleteFloor(id);
   }
 }
