@@ -37,23 +37,23 @@ export class CountryRepository {
   }
 
   async getCountry(id: string) {
-    const building = await this.gremlinService.execute(
+    const country = await this.gremlinService.execute(
       "g.V('id', id).hasLabel('Country')",
       {
         id,
       },
     );
-    if (!building._items.length) {
+    if (!country._items.length) {
       throw new NotFoundException('id not found');
     }
     const states = await this.gremlinService.execute(
-      "g.V('id', id).hasLabel('State').out()",
+      "g.V('id', id).hasLabel('Country').out()",
       {
         id,
       },
     );
-    building.states = states;
-    return this.countryMapper.toDomain(building)[0];
+    country.states = states;
+    return this.countryMapper.toDomain(country)[0];
   }
 
   async getAllCountries() {
