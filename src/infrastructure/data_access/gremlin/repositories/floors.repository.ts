@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Floor } from 'src/domain/floors/floor/floor';
 import { FloorMapper } from '../../mappers/floor.mapper';
 import { GremlinService } from '../gremlin.service';
@@ -54,9 +58,40 @@ export class FloorRepository {
     return this.floorMapper.toDomain(floorCreated)[0];
   }
 
+  async getFloor(id: string) {
+    const floor = await this.gremlinService.execute(
+      "g.V('id', id).hasLabel('Floor')",
+      {
+        id,
+      },
+    );
+    if (!floor._items.length) {
+      throw new NotFoundException('id not found');
+    }
+    const rooms = await this.gremlinService.execute(
+      "g.V('id', id).hasLabel('Floor').out()",
+      {
+        id,
+      },
+    );
+    floor.rooms = rooms;
+    return this.floorMapper.toDomain(floor)[0];
+  }
+
   async getAllFloors() {
     const floors = await this.gremlinService.execute("g.V().hasLabel('Floor')");
     const result = { _items: this.floorMapper.toDomain(floors) };
     return result;
+  }
+
+  async deleteFloor(id: string) {
+    await this.getFloor(id);
+    await this.gremlinService.execute(
+      "g.V('id', id).hasLabel('Floor').drop()",
+      {
+        id,
+      },
+    );
+    return 'Deleted';
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Floor } from 'src/domain/floors/floor/floor';
 import { FloorRepository } from 'src/infrastructure/data_access/gremlin/repositories/floors.repository';
@@ -25,5 +25,16 @@ export class FloorController {
     const floor = Floor.create(body);
     const result = await this.floorRepo.createFloor(floor, body.buildingId);
     return result;
+  }
+
+  @Serialize(FloorDto)
+  @Get('/:id')
+  async getBuilding(@Param('id') id: string) {
+    return this.floorRepo.getFloor(id);
+  }
+
+  @Delete('/:id')
+  async deleteBuilding(@Param('id') id: string) {
+    return this.floorRepo.deleteFloor(id);
   }
 }

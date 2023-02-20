@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsString, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateBuildingDto {
@@ -7,6 +7,7 @@ export class CreateBuildingDto {
     default: 'luxura dreams',
   })
   @IsString()
+  @MinLength(1)
   name: string;
 
   @ApiProperty({
@@ -14,5 +15,6 @@ export class CreateBuildingDto {
     default: 'Banglore Tech park',
   })
   @IsString()
+  @MinLength(2)
   address: string;
 }
