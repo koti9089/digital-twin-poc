@@ -9,6 +9,7 @@ export class City extends Entity<ICityProps> {
     const { id } = props;
     super(id);
     this._name = props.name;
+    this._buildings = props.buildings;
   }
 
   public static create(props: ICityProps): City {
@@ -31,7 +32,7 @@ export class City extends Entity<ICityProps> {
   get buildings(): Building[] | undefined {
     return this._buildings;
   }
-  set floors(buildings: Building[] | undefined) {
+  set buildings(buildings: Building[] | undefined) {
     this._buildings = buildings;
   }
 }

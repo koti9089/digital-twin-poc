@@ -4,15 +4,15 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateCityDto {
   @ApiProperty({
     description: 'City must belong to some State',
-    default: 'Srinagar',
+    default: 'J&K',
   })
   @IsString()
   @MinLength(1)
-  countryId: string;
+  stateID: string;
 
   @ApiProperty({
     description: 'State Name',
-    default: 'J&k',
+    default: 'Srinagar',
   })
   @IsString()
   @MinLength(1)

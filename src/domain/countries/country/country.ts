@@ -32,7 +32,7 @@ export class Country extends Entity<ICountryProps> {
   get states(): State[] | undefined {
     return this._states;
   }
-  set floors(states: State[] | undefined) {
+  set states(states: State[] | undefined) {
     this._states = states;
   }
 }

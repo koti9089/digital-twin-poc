@@ -34,7 +34,7 @@ export class StateController {
   }
 
   @Delete('/:id')
-  async deleteBuilding(@Param('id') id: string) {
+  async deleteState(@Param('id') id: string) {
     return this.stateRepo.deleteState(id);
   }
 }

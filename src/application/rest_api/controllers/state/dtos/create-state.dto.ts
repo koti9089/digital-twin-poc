@@ -12,7 +12,7 @@ export class CreateStateDto {
 
   @ApiProperty({
     description: 'State Name',
-    default: 'J&k',
+    default: 'J&K',
   })
   @IsString()
   @MinLength(1)

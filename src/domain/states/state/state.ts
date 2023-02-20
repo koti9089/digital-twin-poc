@@ -32,7 +32,7 @@ export class State extends Entity<IStateProps> {
   get cities(): City[] | undefined {
     return this._cities;
   }
-  set floors(cities: City[] | undefined) {
+  set cities(cities: City[] | undefined) {
     this._cities = cities;
   }
 }

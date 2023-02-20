@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GremlinService } from 'src/infrastructure/data_access/gremlin/gremlin.service';
 import { CountryRepository } from 'src/infrastructure/data_access/gremlin/repositories/country.repository';
+import { BuildingMapper } from 'src/infrastructure/data_access/mappers/building.mapper';
 import { CityMapper } from 'src/infrastructure/data_access/mappers/city.mapper';
 import { CountryMapper } from 'src/infrastructure/data_access/mappers/country.mapper';
 import { FloorMapper } from 'src/infrastructure/data_access/mappers/floor.mapper';
@@ -20,6 +21,7 @@ import { CountryController } from './country.controller';
     IotDeviceMapper,
     StateMapper,
     CityMapper,
+    BuildingMapper,
   ],
 })
 export class CountryModule {}
