@@ -8,6 +8,9 @@ import { GremlinService } from './infrastructure/data_access/gremlin/gremlin.ser
 import { FloorModule } from './application/rest_api/controllers/floor/floor.module';
 import { RoomModule } from './application/rest_api/controllers/room/room.module';
 import { IotDeviceModule } from './application/rest_api/controllers/iot_device/iot_device.module';
+import { CountryModule } from './application/rest_api/controllers/country/country.module';
+import { StateModule } from './application/rest_api/controllers/state/state.module';
+import { CityModule } from './application/rest_api/controllers/city/city.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -18,6 +21,9 @@ import { IotDeviceModule } from './application/rest_api/controllers/iot_device/i
     FloorModule,
     RoomModule,
     IotDeviceModule,
+    CountryModule,
+    StateModule,
+    CityModule,
   ],
   controllers: [AppController],
   providers: [
