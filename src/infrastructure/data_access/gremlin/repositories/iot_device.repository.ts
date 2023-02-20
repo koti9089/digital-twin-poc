@@ -34,12 +34,12 @@ export class iotDeviceRepository {
     if (iotDeviceFound._items.length > 0) {
       throw new ConflictException('IotDevice already exists');
     }
-
+    const iotDeviceId = `${iotDevice.name}-${iotDevice.id}`;
     const floorCreated = await this.gremlinService.execute(
       "g.addV(label).property('id', id).property('name', name).property('iotDeviceId', iotDeviceId).property('pk', 'pk')",
       {
         label: 'IotDevice',
-        id: `${iotDevice.name}`,
+        id: iotDeviceId,
         name: iotDevice.name,
         iotDeviceId: iotDevice.id,
       },
@@ -51,7 +51,7 @@ export class iotDeviceRepository {
       "g.V(roomId).hasLabel('Room').addE(relationship).to(g.V(iotDeviceId).hasLabel('IotDevice'))",
       {
         roomId: roomId,
-        iotDeviceId: iotDevice.name,
+        iotDeviceId: iotDeviceId,
         relationship: 'has',
       },
     );

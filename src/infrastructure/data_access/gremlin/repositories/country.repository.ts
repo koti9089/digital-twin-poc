@@ -16,9 +16,9 @@ export class CountryRepository {
 
   async createCountry(country: Country) {
     const found = await this.gremlinService.execute(
-      "g.V('id', id).hasLabel('Country')",
+      "g.V('name', name).hasLabel('Country')",
       {
-        id: country.name,
+        name: country.name,
       },
     );
     if (found._items.length > 0) {
@@ -28,7 +28,7 @@ export class CountryRepository {
       "g.addV(label).property('id', id).property('name', name).property('countryId', countryId).property('pk', 'pk')",
       {
         label: 'Country',
-        id: `${country.name}`,
+        id: `${country.name}-${country.id}`,
         name: country.name,
         countryId: country.id,
       },

@@ -35,11 +35,12 @@ export class CityRepository {
       throw new ConflictException('City already exists');
     }
 
+    const cityId = `${city.name}-${city.id}`;
     const cityCreated = await this.gremlinService.execute(
       "g.addV(label).property('id', id).property('name', name).property('cityId', cityId).property('pk', 'pk')",
       {
         label: 'City',
-        id: `${city.name}`,
+        id: cityId,
         name: city.name,
         cityId: city.id,
       },
@@ -51,7 +52,7 @@ export class CityRepository {
       "g.V(stateId).hasLabel('State').addE(relationship).to(g.V(cityId).hasLabel('City'))",
       {
         stateId: stateId,
-        cityId: city.name,
+        cityId: cityId,
         relationship: 'has',
       },
     );

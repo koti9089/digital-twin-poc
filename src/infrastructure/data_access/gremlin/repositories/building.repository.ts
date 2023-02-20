@@ -34,11 +34,12 @@ export class BuildingRepository {
     if (found._items.length > 0) {
       throw new ConflictException('Building already exists');
     }
+    const buildingId = `${building.name}-${building.id}`;
     const buildingCreated = await this.gremlinService.execute(
       "g.addV(label).property('id', id).property('name', name).property('address', address).property('buildingId', buildingId).property('pk', 'pk')",
       {
         label: 'Building',
-        id: `${building.name}`,
+        id: buildingId,
         name: building.name,
         address: building.address,
         buildingId: building.id,
@@ -49,7 +50,7 @@ export class BuildingRepository {
       "g.V(cityId).hasLabel('City').addE(relationship).to(g.V(buildingId).hasLabel('Building'))",
       {
         cityId: cityId,
-        buildingId: building.name,
+        buildingId: buildingId,
         relationship: 'has',
       },
     );

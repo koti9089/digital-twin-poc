@@ -34,12 +34,12 @@ export class StateRepository {
     if (stateFound._items.length > 0) {
       throw new ConflictException('State already exists');
     }
-
+    const stateId = `${state.name}-${state.id}`;
     const stateCreated = await this.gremlinService.execute(
       "g.addV(label).property('id', id).property('name', name).property('stateId', stateId).property('pk', 'pk')",
       {
         label: 'State',
-        id: `${state.name}`,
+        id: stateId,
         name: state.name,
         stateId: state.id,
       },
@@ -51,7 +51,7 @@ export class StateRepository {
       "g.V(countryId).hasLabel('Country').addE(relationship).to(g.V(stateId).hasLabel('State'))",
       {
         countryId: countryId,
-        stateId: state.name,
+        stateId: stateId,
         relationship: 'has',
       },
     );

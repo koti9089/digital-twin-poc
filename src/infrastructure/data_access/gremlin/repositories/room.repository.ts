@@ -35,11 +35,12 @@ export class RoomRepository {
       throw new ConflictException('Room already exists');
     }
 
+    const roomId = `${room.name}-${room.id}`;
     const roomCreated = await this.gremlinService.execute(
       "g.addV(label).property('id', id).property('name', name).property('roomId', roomId).property('pk', 'pk')",
       {
         label: 'Room',
-        id: `${room.name}`,
+        id: roomId,
         name: room.name,
         roomId: room.id,
       },
@@ -51,7 +52,7 @@ export class RoomRepository {
       "g.V(floorId).hasLabel('Floor').addE(relationship).to(g.V(roomId).hasLabel('Room'))",
       {
         floorId: floorId,
-        roomId: room.name,
+        roomId: roomId,
         relationship: 'has',
       },
     );
