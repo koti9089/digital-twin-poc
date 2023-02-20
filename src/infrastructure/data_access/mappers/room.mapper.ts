@@ -7,8 +7,8 @@ import { IotDeviceMapper } from './iot-device.mapper';
 export class RoomMapper {
   constructor(private iotDeviceMapper: IotDeviceMapper) {}
   toDomain(roomResponse) {
-    const iotDevices: IotDevice[] | undefined = roomResponse.rooms
-      ? this.iotDeviceMapper.toDomain(roomResponse.rooms)
+    const iotDevices: IotDevice[] | undefined = roomResponse.iot_devices
+      ? this.iotDeviceMapper.toDomain(roomResponse.iot_devices)
       : undefined;
     const room = roomResponse._items.map((room) => {
       return Room.create({

@@ -70,7 +70,7 @@ export class RoomRepository {
       throw new NotFoundException('id not found');
     }
     const iot_devices = await this.gremlinService.execute(
-      "g.V('id', id).hasLabel('IotDevice').out()",
+      "g.V('id', id).hasLabel('Room').out()",
       {
         id,
       },
