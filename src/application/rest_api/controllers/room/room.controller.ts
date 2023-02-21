@@ -23,7 +23,7 @@ export class RoomController {
   @Post()
   async createRoom(@Body() body: CreateRoomDto) {
     const room = Room.create(body);
-    const result = await this.roomRepo.createRoom(room, body.floorId);
+    const result = await this.roomRepo.createRoom(room, body.terminalId);
     return result;
   }
 

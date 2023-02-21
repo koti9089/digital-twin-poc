@@ -1,6 +1,6 @@
 import { Expose, Type } from 'class-transformer';
 import { RoomDto } from '../../room/dtos/room.dto';
-export class FloorDto {
+export class TerminalDto {
   @Expose()
   id: string;
 

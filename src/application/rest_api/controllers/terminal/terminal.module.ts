@@ -1,19 +1,19 @@
 import { Module } from '@nestjs/common';
 import { GremlinService } from 'src/infrastructure/data_access/gremlin/gremlin.service';
-import { FloorRepository } from 'src/infrastructure/data_access/gremlin/repositories/floors.repository';
-import { FloorMapper } from 'src/infrastructure/data_access/mappers/floor.mapper';
+import { TerminalRepository } from 'src/infrastructure/data_access/gremlin/repositories/terminal.repository';
+import { TerminalMapper } from 'src/infrastructure/data_access/mappers/terminal.mapper';
 import { IotDeviceMapper } from 'src/infrastructure/data_access/mappers/iot-device.mapper';
 import { RoomMapper } from 'src/infrastructure/data_access/mappers/room.mapper';
-import { FloorController } from './floor.controller';
+import { TerminalController } from './terminal.controller';
 
 @Module({
-  controllers: [FloorController],
+  controllers: [TerminalController],
   providers: [
     GremlinService,
-    FloorRepository,
-    FloorMapper,
+    TerminalRepository,
+    TerminalMapper,
     RoomMapper,
     IotDeviceMapper,
   ],
 })
-export class FloorModule {}
+export class TerminalModule {}

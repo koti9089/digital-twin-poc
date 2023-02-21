@@ -3,7 +3,7 @@ import { GremlinService } from 'src/infrastructure/data_access/gremlin/gremlin.s
 import { CityRepository } from 'src/infrastructure/data_access/gremlin/repositories/city.repository';
 import { AirportMapper } from 'src/infrastructure/data_access/mappers/airport.mapper';
 import { CityMapper } from 'src/infrastructure/data_access/mappers/city.mapper';
-import { FloorMapper } from 'src/infrastructure/data_access/mappers/floor.mapper';
+import { TerminalMapper } from 'src/infrastructure/data_access/mappers/terminal.mapper';
 import { IotDeviceMapper } from 'src/infrastructure/data_access/mappers/iot-device.mapper';
 import { RoomMapper } from 'src/infrastructure/data_access/mappers/room.mapper';
 import { CityController } from './city.controller';
@@ -14,7 +14,7 @@ import { CityController } from './city.controller';
     GremlinService,
     AirportMapper,
     CityMapper,
-    FloorMapper,
+    TerminalMapper,
     RoomMapper,
     IotDeviceMapper,
     CityRepository,

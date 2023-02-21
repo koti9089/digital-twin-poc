@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FloorController } from './floor.controller';
+import { FloorController } from './terminal.controller';
 
 describe('FloorController', () => {
   let controller: FloorController;

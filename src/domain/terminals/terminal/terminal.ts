@@ -1,19 +1,19 @@
 import { Room } from 'src/domain/rooms/room/room';
 import { Entity } from '../../entity';
-import { IFloorProps } from './floor.props';
+import { ITerminalProps } from './terminal.props';
 
-export class Floor extends Entity<IFloorProps> {
+export class Terminal extends Entity<ITerminalProps> {
   private _name: string;
   private _rooms?: Room[];
-  private constructor(props: IFloorProps) {
+  private constructor(props: ITerminalProps) {
     const { id } = props;
     super(id);
     this._name = props.name;
     this._rooms = props.rooms;
   }
 
-  public static create(props: IFloorProps): Floor {
-    const instance = new Floor(props);
+  public static create(props: ITerminalProps): Terminal {
+    const instance = new Terminal(props);
     return instance;
   }
 

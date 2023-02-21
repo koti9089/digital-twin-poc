@@ -3,16 +3,16 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateRoomDto {
   @ApiProperty({
-    description: 'Room must belong to some floor',
-    default: '1st',
+    description: 'Room must belong to some terminal',
+    default: 'TerminalId',
   })
   @IsString()
   @MinLength(1)
-  floorId: string;
+  terminalId: string;
 
   @ApiProperty({
     description: 'Room Name',
-    default: '1',
+    default: 'Security Room',
   })
   @IsString()
   @MinLength(1)

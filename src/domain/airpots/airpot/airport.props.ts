@@ -1,8 +1,8 @@
-import { Floor } from 'src/domain/floors/floor/floor';
+import { Terminal } from 'src/domain/terminals/terminal/terminal';
 
 export interface IAirportProps {
   id?: string;
   name: string;
   address: string;
-  floors?: Floor[];
+  terminals?: Terminal[];
 }

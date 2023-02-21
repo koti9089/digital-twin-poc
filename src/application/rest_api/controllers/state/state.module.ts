@@ -3,7 +3,7 @@ import { GremlinService } from 'src/infrastructure/data_access/gremlin/gremlin.s
 import { StateRepository } from 'src/infrastructure/data_access/gremlin/repositories/state.repository';
 import { AirportMapper } from 'src/infrastructure/data_access/mappers/airport.mapper';
 import { CityMapper } from 'src/infrastructure/data_access/mappers/city.mapper';
-import { FloorMapper } from 'src/infrastructure/data_access/mappers/floor.mapper';
+import { TerminalMapper } from 'src/infrastructure/data_access/mappers/terminal.mapper';
 import { IotDeviceMapper } from 'src/infrastructure/data_access/mappers/iot-device.mapper';
 import { RoomMapper } from 'src/infrastructure/data_access/mappers/room.mapper';
 import { StateMapper } from 'src/infrastructure/data_access/mappers/state.mapper';
@@ -17,7 +17,7 @@ import { StateController } from './state.controller';
     StateMapper,
     CityMapper,
     AirportMapper,
-    FloorMapper,
+    TerminalMapper,
     RoomMapper,
     IotDeviceMapper,
   ],

@@ -68,13 +68,13 @@ export class AirportRepository {
     if (!airport._items.length) {
       throw new NotFoundException('id not found');
     }
-    const floors = await this.gremlinService.execute(
+    const terminals = await this.gremlinService.execute(
       "g.V('id', id).hasLabel('Airport').out()",
       {
         id,
       },
     );
-    airport.floors = floors;
+    airport.terminals = terminals;
     return this.airportMapper.toDomain(airport)[0];
   }
 

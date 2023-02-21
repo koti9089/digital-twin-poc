@@ -5,7 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AirportModule } from './application/rest_api/controllers/airport/airport.module';
 import { GremlinService } from './infrastructure/data_access/gremlin/gremlin.service';
-import { FloorModule } from './application/rest_api/controllers/floor/floor.module';
+import { TerminalModule } from './application/rest_api/controllers/terminal/terminal.module';
 import { RoomModule } from './application/rest_api/controllers/room/room.module';
 import { IotDeviceModule } from './application/rest_api/controllers/iot_device/iot_device.module';
 import { CountryModule } from './application/rest_api/controllers/country/country.module';
@@ -18,7 +18,7 @@ import { CityModule } from './application/rest_api/controllers/city/city.module'
       envFilePath: '.env',
     }),
     AirportModule,
-    FloorModule,
+    TerminalModule,
     RoomModule,
     IotDeviceModule,
     CountryModule,

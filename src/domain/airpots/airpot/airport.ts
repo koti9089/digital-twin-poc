@@ -1,17 +1,17 @@
-import { Floor } from 'src/domain/floors/floor/floor';
+import { Terminal } from 'src/domain/terminals/terminal/terminal';
 import { Entity } from '../../entity';
 import { IAirportProps } from './airport.props';
 
 export class Airport extends Entity<IAirportProps> {
   private _name: string;
   private _address: string;
-  private _floors?: Floor[];
+  private _terminals?: Terminal[];
   private constructor(props: IAirportProps) {
     const { id } = props;
     super(id);
     this._name = props.name;
     this._address = props.address;
-    this._floors = props.floors;
+    this._terminals = props.terminals;
   }
 
   public static create(props: IAirportProps): Airport {
@@ -39,10 +39,10 @@ export class Airport extends Entity<IAirportProps> {
     this._address = address;
   }
 
-  get floors(): Floor[] | undefined {
-    return this._floors;
+  get terminals(): Terminal[] | undefined {
+    return this._terminals;
   }
-  set floors(floors: Floor[] | undefined) {
-    this._floors = floors;
+  set terminals(terminals: Terminal[] | undefined) {
+    this._terminals = terminals;
   }
 }

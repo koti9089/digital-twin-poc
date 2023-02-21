@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Floor } from 'src/domain/floors/floor/floor';
+import { Terminal } from 'src/domain/terminals/terminal/terminal';
 import { Room } from 'src/domain/rooms/room/room';
 import { RoomMapper } from './room.mapper';
 
 @Injectable()
-export class FloorMapper {
+export class TerminalMapper {
   constructor(private roomMapper: RoomMapper) {}
-  toDomain(floorResponse) {
-    const rooms: Room[] | undefined = floorResponse.rooms
-      ? this.roomMapper.toDomain(floorResponse.rooms)
+  toDomain(terminalResponse) {
+    const rooms: Room[] | undefined = terminalResponse.rooms
+      ? this.roomMapper.toDomain(terminalResponse.rooms)
       : undefined;
-    const floor = floorResponse._items.map((floor) => {
-      return Floor.create({
+    const floor = terminalResponse._items.map((floor) => {
+      return Terminal.create({
         id: floor.id,
         name: floor.properties.name[0].value,
         rooms,

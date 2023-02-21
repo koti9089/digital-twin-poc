@@ -14,22 +14,22 @@ export class RoomRepository {
     private roomMapper: RoomMapper,
   ) {}
 
-  async createRoom(room: Room, floorId: string) {
-    const floorFound = await this.gremlinService.execute(
-      "g.V('id', id).hasLabel('Floor')",
+  async createRoom(room: Room, terminalId: string) {
+    const terminalFound = await this.gremlinService.execute(
+      "g.V('id', id).hasLabel('Terminal')",
       {
-        id: floorId,
+        id: terminalId,
       },
     );
-    if (!floorFound._items.length) {
-      throw new ConflictException("Floor doesn't exists");
+    if (!terminalFound._items.length) {
+      throw new ConflictException("Terminal doesn't exists");
     }
 
     const roomFound = await this.gremlinService.execute(
       // "g.V('id', id).hasLabel('Room')",
-      "g.V().has('Floor', 'id', id).out('hasRoom').has('name', name)",
+      "g.V().has('Terminal', 'id', id).out('hasRoom').has('name', name)",
       {
-        id: floorId,
+        id: terminalId,
         name: room.name,
       },
     );
@@ -48,12 +48,10 @@ export class RoomRepository {
       },
     );
 
-    // make relations of floor with building
-
     await this.gremlinService.execute(
-      "g.V(floorId).hasLabel('Floor').addE(relationship).to(g.V(roomId).hasLabel('Room'))",
+      "g.V(terminalId).hasLabel('Terminal').addE(relationship).to(g.V(roomId).hasLabel('Room'))",
       {
-        floorId: floorId,
+        terminalId: terminalId,
         roomId: roomId,
         relationship: 'hasRoom',
       },
