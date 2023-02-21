@@ -1,6 +1,6 @@
 import { Floor } from 'src/domain/floors/floor/floor';
 
-export interface IBuildingProps {
+export interface IAirportProps {
   id?: string;
   name: string;
   address: string;

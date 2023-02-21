@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GremlinService } from 'src/infrastructure/data_access/gremlin/gremlin.service';
 import { StateRepository } from 'src/infrastructure/data_access/gremlin/repositories/state.repository';
-import { BuildingMapper } from 'src/infrastructure/data_access/mappers/building.mapper';
+import { AirportMapper } from 'src/infrastructure/data_access/mappers/airport.mapper';
 import { CityMapper } from 'src/infrastructure/data_access/mappers/city.mapper';
 import { FloorMapper } from 'src/infrastructure/data_access/mappers/floor.mapper';
 import { IotDeviceMapper } from 'src/infrastructure/data_access/mappers/iot-device.mapper';
@@ -16,7 +16,7 @@ import { StateController } from './state.controller';
     GremlinService,
     StateMapper,
     CityMapper,
-    BuildingMapper,
+    AirportMapper,
     FloorMapper,
     RoomMapper,
     IotDeviceMapper,

@@ -1,12 +1,12 @@
 import { Floor } from 'src/domain/floors/floor/floor';
 import { Entity } from '../../entity';
-import { IBuildingProps } from './building.props';
+import { IAirportProps } from './airport.props';
 
-export class Building extends Entity<IBuildingProps> {
+export class Airport extends Entity<IAirportProps> {
   private _name: string;
   private _address: string;
   private _floors?: Floor[];
-  private constructor(props: IBuildingProps) {
+  private constructor(props: IAirportProps) {
     const { id } = props;
     super(id);
     this._name = props.name;
@@ -14,8 +14,8 @@ export class Building extends Entity<IBuildingProps> {
     this._floors = props.floors;
   }
 
-  public static create(props: IBuildingProps): Building {
-    const instance = new Building(props);
+  public static create(props: IAirportProps): Airport {
+    const instance = new Airport(props);
     return instance;
   }
 

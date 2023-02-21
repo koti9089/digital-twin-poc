@@ -1,9 +1,9 @@
 import { IsString, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateBuildingDto {
+export class CreateAirportDto {
   @ApiProperty({
-    description: 'Building must belong to some City',
+    description: 'Airport must belong to some City',
     default: 'Srinagar',
   })
   @IsString()
@@ -11,8 +11,8 @@ export class CreateBuildingDto {
   cityId: string;
 
   @ApiProperty({
-    description: 'Building Name',
-    default: 'luxura dreams',
+    description: 'Airport Name',
+    default: 'Dehli Airport',
   })
   @IsString()
   @MinLength(1)
@@ -20,7 +20,7 @@ export class CreateBuildingDto {
 
   @ApiProperty({
     description: 'Address Name',
-    default: 'Banglore Tech park',
+    default: 'Dehli 190001',
   })
   @IsString()
   @MinLength(2)

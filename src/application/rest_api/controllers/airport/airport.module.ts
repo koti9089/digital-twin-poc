@@ -1,21 +1,21 @@
 import { Module } from '@nestjs/common';
 import { GremlinService } from 'src/infrastructure/data_access/gremlin/gremlin.service';
-import { BuildingRepository } from 'src/infrastructure/data_access/gremlin/repositories/building.repository';
-import { BuildingMapper } from 'src/infrastructure/data_access/mappers/building.mapper';
+import { AirportRepository } from 'src/infrastructure/data_access/gremlin/repositories/airport.repository';
+import { AirportMapper } from 'src/infrastructure/data_access/mappers/airport.mapper';
 import { FloorMapper } from 'src/infrastructure/data_access/mappers/floor.mapper';
 import { IotDeviceMapper } from 'src/infrastructure/data_access/mappers/iot-device.mapper';
 import { RoomMapper } from 'src/infrastructure/data_access/mappers/room.mapper';
-import { BuildingController } from './building.controller';
+import { AirportController } from './airport.controller';
 
 @Module({
-  controllers: [BuildingController],
+  controllers: [AirportController],
   providers: [
     GremlinService,
-    BuildingRepository,
-    BuildingMapper,
+    AirportRepository,
+    AirportMapper,
     FloorMapper,
     RoomMapper,
     IotDeviceMapper,
   ],
 })
-export class BuildingModule {}
+export class AirportModule {}

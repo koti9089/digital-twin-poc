@@ -1,15 +1,15 @@
-import { Building } from 'src/domain/buildings/building/building';
+import { Airport } from 'src/domain/airpots/airpot/airport';
 import { Entity } from '../../entity';
 import { ICityProps } from './city.props';
 
 export class City extends Entity<ICityProps> {
   private _name: string;
-  private _buildings?: Building[];
+  private _airports?: Airport[];
   private constructor(props: ICityProps) {
     const { id } = props;
     super(id);
     this._name = props.name;
-    this._buildings = props.buildings;
+    this._airports = props.airports;
   }
 
   public static create(props: ICityProps): City {
@@ -29,10 +29,10 @@ export class City extends Entity<ICityProps> {
     this._name = name;
   }
 
-  get buildings(): Building[] | undefined {
-    return this._buildings;
+  get airports(): Airport[] | undefined {
+    return this._airports;
   }
-  set buildings(buildings: Building[] | undefined) {
-    this._buildings = buildings;
+  set airports(_airports: Airport[] | undefined) {
+    this._airports = _airports;
   }
 }

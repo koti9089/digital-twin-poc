@@ -1,20 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { Building } from 'src/domain/buildings/building/building';
+import { Airport } from 'src/domain/airpots/airpot/airport';
 import { City } from 'src/domain/cities/city/city';
-import { BuildingMapper } from './building.mapper';
+import { AirportMapper } from './airport.mapper';
 
 @Injectable()
 export class CityMapper {
-  constructor(private buildingMapper: BuildingMapper) {}
+  constructor(private airportMapper: AirportMapper) {}
   toDomain(cityResponse) {
-    const buildings: Building[] | undefined = cityResponse.buildings
-      ? this.buildingMapper.toDomain(cityResponse.buildings)
+    const airports: Airport[] | undefined = cityResponse.airports
+      ? this.airportMapper.toDomain(cityResponse.airports)
       : undefined;
     const city = cityResponse._items.map((state) => {
       return City.create({
         id: state.id,
         name: state.properties.name[0].value,
-        buildings,
+        airports,
       });
     });
     return city;

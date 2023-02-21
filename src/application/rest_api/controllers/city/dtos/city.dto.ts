@@ -1,5 +1,5 @@
 import { Expose, Type } from 'class-transformer';
-import { BuildingDto } from '../../building/dtos/building.dto';
+import { AirportDto } from '../../airport/dtos/airport.dto';
 export class CityDto {
   @Expose()
   id: string;
@@ -8,6 +8,6 @@ export class CityDto {
   name: string;
 
   @Expose()
-  @Type(() => BuildingDto)
-  buildings?: BuildingDto[];
+  @Type(() => AirportDto)
+  airports?: AirportDto[];
 }
