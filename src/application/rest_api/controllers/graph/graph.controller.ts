@@ -18,10 +18,15 @@ export class GraphController {
 
       for (let j = 0; j < graph.vertices.length; j++) {
         const vertex = graph.vertices[j];
-        const id = `${vertex.name}-${uuidv4()}`;
-        const query = `g.addV('${vertex.type}').property('id', '${id}').property('name', '${vertex.name}').property('pk', 'pk')`;
+        const id = uuidv4();
+        const finalId = `${vertex.name}-${id}`;
+        const query = `g.addV('${
+          vertex.type
+        }').property('id', '${finalId}').property('name', '${
+          vertex.name
+        }').property('${vertex.type.toLowerCase()}id', '${id}').property('pk', 'pk')`;
         await this.gremlinService.execute(query);
-        verticesMap.set(vertex.id, id);
+        verticesMap.set(vertex.id, finalId);
       }
 
       for (let j = 0; j < graph.edges.length; j++) {
