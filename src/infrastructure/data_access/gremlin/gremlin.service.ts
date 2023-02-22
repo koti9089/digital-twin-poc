@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import * as Gremlin from 'gremlin';
 const DriverRemoteConnection = Gremlin.driver.DriverRemoteConnection;
 // const traversal = Gremlin.process.AnonymousTraversalSource.traversal;
-
 @Injectable()
 export class GremlinService {
   private readonly _endpoint: string;

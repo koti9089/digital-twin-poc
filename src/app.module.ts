@@ -12,6 +12,7 @@ import { CountryModule } from './application/rest_api/controllers/country/countr
 import { StateModule } from './application/rest_api/controllers/state/state.module';
 import { CityModule } from './application/rest_api/controllers/city/city.module';
 import { SearchModule } from './application/rest_api/controllers/search/search.module';
+import { GraphModule } from './application/rest_api/controllers/graph/graph.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -26,6 +27,7 @@ import { SearchModule } from './application/rest_api/controllers/search/search.m
     StateModule,
     CityModule,
     SearchModule,
+    GraphModule,
   ],
   controllers: [AppController],
   providers: [
