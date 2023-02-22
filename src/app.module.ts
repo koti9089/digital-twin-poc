@@ -11,6 +11,7 @@ import { IotDeviceModule } from './application/rest_api/controllers/iot_device/i
 import { CountryModule } from './application/rest_api/controllers/country/country.module';
 import { StateModule } from './application/rest_api/controllers/state/state.module';
 import { CityModule } from './application/rest_api/controllers/city/city.module';
+import { SearchModule } from './application/rest_api/controllers/search/search.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -24,6 +25,7 @@ import { CityModule } from './application/rest_api/controllers/city/city.module'
     CountryModule,
     StateModule,
     CityModule,
+    SearchModule,
   ],
   controllers: [AppController],
   providers: [
