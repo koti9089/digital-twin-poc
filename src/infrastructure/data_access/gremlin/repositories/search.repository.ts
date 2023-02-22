@@ -49,10 +49,6 @@ export class SearchRepository {
     const inEdge = await this[`${mapper[searchWithin]}`].toDomain(
       incomingEdge,
     )[0];
-    console.log(
-      '🚀 ~ file: search.repository.ts:51 ~ SearchRepository ~ searchHierarchy ~ inEdge:',
-      inEdge,
-    );
 
     const iotDevices = await this.iotDeviceMapper.toDomain(
       allOutGoingEdgesToIotDevices,
