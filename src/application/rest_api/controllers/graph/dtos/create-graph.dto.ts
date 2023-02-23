@@ -84,7 +84,8 @@ class EdgeDto {
   to: string;
 }
 
-class DataDto {
+@ApiExtraModels(VertexDto, EdgeDto)
+export class DataDto {
   @ApiProperty({
     description: 'List of vertices in the graph',
     type: 'array',
@@ -118,8 +119,7 @@ class DataDto {
   edges: EdgeDto[];
 }
 
-@ApiExtraModels(VertexDto, EdgeDto, DataDto)
-export class CreateGraphDto {
+ class CreateGraphDto {
   @ApiProperty({
     description: 'data',
     type: 'array',
