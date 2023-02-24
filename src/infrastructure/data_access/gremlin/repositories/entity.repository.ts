@@ -101,7 +101,24 @@ export class EntityRepository {
   }
 
   async deleteEntity(id: string) {
-    await this.gremlinService.execute("g.V().has('id'," + `${id}).drop()`, {});
+    await this.gremlinService.execute(`g.V().has('id',${id}).drop()`);
     return 'Deleted';
+  }
+
+  async createRelationship(from_node_id, to_node_id, label: string) {
+    const res = await this.gremlinService.execute(
+      `g.V('${from_node_id}').outE('${label}').where(inV().hasId('${to_node_id}'))`,
+    );
+    if (res._items.length > 0) {
+      throw new ConflictException('Relation already exists');
+    }
+    return this.gremlinService.execute(
+      `g.V('${from_node_id}').addE('${label}').to(g.V('${to_node_id}'))`,
+    );
+  }
+
+  async deleteRelationship(of: string) {
+    await this.gremlinService.execute(`g.V('${of}').outE().drop()`);
+    return 'Deleted relationship';
   }
 }

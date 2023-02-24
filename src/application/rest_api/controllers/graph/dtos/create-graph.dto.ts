@@ -48,7 +48,6 @@ class EdgeDto {
     description: 'relation name',
     default: 'hasState',
     enum: [
-      'hasCountry',
       'hasState',
       'hasCity',
       'hasAirport',
@@ -59,7 +58,6 @@ class EdgeDto {
   })
   @IsString()
   @IsIn([
-    'hasCountry',
     'hasState',
     'hasCity',
     'hasAirport',

@@ -1,7 +1,7 @@
 import { Entity } from '../entity';
-import {IDomainEntityProps } from './domainEntity.props';
+import { IDomainEntityProps } from './domainEntity.props';
 
-export class DomainEntity extends Entity<IDomainEntityProps>{
+export class DomainEntity extends Entity<IDomainEntityProps> {
   private _name: string;
   private _type: string;
 
@@ -10,8 +10,8 @@ export class DomainEntity extends Entity<IDomainEntityProps>{
     super(id);
     this._name = props.name;
     this._type = props.type;
-  } 
-  
+  }
+
   public static create(props: IDomainEntityProps): DomainEntity {
     const instance = new DomainEntity(props);
     return instance;
