@@ -32,7 +32,8 @@ export class EntityController {
     return this.entityRepo.createEntitiesWithRelationships(body);
   }
 
-  @Get('/:relationDirection:/:id')
+  // clashes with /:id/:type prefic relation is important
+  @Get('relation/:relationDirection/:id')
   async getEntityRelationShips(
     @Param('relationDirection') relationDirection: string,
     @Param('id') id: string,

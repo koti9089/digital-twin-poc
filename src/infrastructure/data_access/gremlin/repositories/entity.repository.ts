@@ -8,6 +8,7 @@ import { DataDto } from 'src/application/rest_api/controllers/graph/dtos/create-
 import { DomainEntity } from 'src/domain/entities/domainEntity';
 import { DomainEntityMapper } from '../../mappers/domainentity.mapper';
 import { GremlinService } from '../gremlin.service';
+import { query } from 'express';
 
 @Injectable()
 export class EntityRepository {
@@ -82,27 +83,21 @@ export class EntityRepository {
   }
 
   async getEntityInWordRelationShips(id: string) {
-    const vers = await this.gremlinService.execute(
-      'g.V(' +
-        `'${id}').inE().project('edge_id', 'edge_label', 'from_id', 'to_id').by(id).by(label).by(inV().id()).by(outV().id())`,
-      {},
-    );
+    const query = `g.V('${id}').inE().project('edge_id', 'edge_label', 'from_id', 'to_id').by(id).by(label).by(inV().id()).by(outV().id())`;
+    const vers = await this.gremlinService.execute(query);
     if (!vers._items.length) {
-      throw new NotFoundException('id not found');
+      throw new NotFoundException('id not found or no inEdges');
     }
-    return JSON.stringify(vers);
+    return vers;
   }
 
   async getEntityOutWordRelationShips(id: string) {
-    const vers = await this.gremlinService.execute(
-      'g.V(' +
-        `'${id}').outE().project('edge_id', 'edge_label', 'from_id', 'to_id').by(id).by(label).by(inV().id()).by(outV().id())`,
-      {},
-    );
+    const query = `g.V('${id}').outE().project('edge_id', 'edge_label', 'from_id', 'to_id').by(id).by(label).by(inV().id()).by(outV().id())`;
+    const vers = await this.gremlinService.execute(query);
     if (!vers._items.length) {
       throw new NotFoundException('id not found');
     }
-    return JSON.stringify(vers);
+    return vers;
   }
 
   async deleteEntity(id: string) {
