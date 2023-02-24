@@ -3,6 +3,8 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { v4 as uuidv4 } from 'uuid';
+import { DataDto } from 'src/application/rest_api/controllers/graph/dtos/create-graph.dto';
 import { DomainEntity } from 'src/domain/entities/domainEntity';
 import { DomainEntityMapper } from '../../mappers/domainentity.mapper';
 import { GremlinService } from '../gremlin.service';
@@ -46,8 +48,31 @@ export class EntityRepository {
     return this.domainEntityMapper.toDomain(entity);
   }
 
-  async createEntitiesWithRelationships(query: string) {
+  async createEntitiesWithRelationships(body: DataDto) {
     try {
+      let query = 'g';
+      const verticesMap = new Map();
+      let id: string;
+      for (const vertex of body.vertices) {
+        query += '.addV(label,' + `'${vertex.type}',`;
+        for (const [key, value] of Object.entries(vertex)) {
+          id = uuidv4();
+          const finalId = `${vertex.name}-${id}`;
+          if (key == 'id') {
+            verticesMap.set(value, finalId);
+            query += `'${key}','${finalId}',`;
+          } else if (key != 'type') query += `'${key}','${value}',`;
+        }
+        query += `'${vertex.type.toLowerCase()}Id', '${id}',`;
+        query = query.slice(0, -1) + `).property('pk','pk')`;
+      }
+
+      for (const edge of body.edges) {
+        const from = verticesMap.get(edge.from);
+        const to = verticesMap.get(edge.to);
+        query += `.addE('${edge.relation}').from(g.V().has('id','${from}')).to(g.V().has('id', '${to}')).property('pk','pk')`;
+      }
+      console.log(query);
       await this.gremlinService.execute(query, {});
       return 'Graph Created Successfully';
     } catch (error) {
