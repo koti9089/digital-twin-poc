@@ -37,10 +37,10 @@ class VertexDto {
 
   @ApiProperty({
     description: 'unique id of the vertex',
-    default: '125736',
+    default: '1524',
   })
   @IsString()
-  id: number;
+  id: string;
 }
 
 class EdgeDto {
@@ -119,7 +119,7 @@ export class DataDto {
   edges: EdgeDto[];
 }
 
- class CreateGraphDto {
+class CreateGraphDto {
   @ApiProperty({
     description: 'data',
     type: 'array',
