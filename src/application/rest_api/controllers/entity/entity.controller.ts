@@ -32,22 +32,22 @@ export class EntityController {
   async createEntitiesWithRelationships(@Body() body: DataDto) {
     let query = 'g';
     const verticesMap = new Map();
+    let id: string;
     for (const vertex of body.vertices) {
       query += '.addV(label,' + `'${vertex.type}',`;
       for (const [key, value] of Object.entries(vertex)) {
-        const id = uuidv4();
+        id = uuidv4();
         const finalId = `${vertex.name}-${id}`;
         if (key == 'id') {
           verticesMap.set(value, finalId);
           query += `'${key}','${finalId}',`;
         } else if (key != 'type') query += `'${key}','${value}',`;
       }
+      query += `'${vertex.type.toLowerCase()}Id', '${id}',`;
       query = query.slice(0, -1) + `).property('pk','pk')`;
     }
 
     for (const edge of body.edges) {
-      console.table(verticesMap);
-      console.table(edge);
       const from = verticesMap.get(edge.from);
       const to = verticesMap.get(edge.to);
       query += `.addE('${edge.relation}').from(g.V().has('id','${from}')).to(g.V().has('id', '${to}')).property('pk','pk')`;

@@ -21,7 +21,7 @@ export class GraphController {
           vertex.type
         }').property('id', '${finalId}').property('name', '${
           vertex.name
-        }').property('${vertex.type.toLowerCase()}id', '${id}').property('pk', 'pk')`;
+        }').property('${vertex.type.toLowerCase()}Id', '${id}').property('pk', 'pk')`;
         await this.gremlinService.execute(query);
         verticesMap.set(vertex.id, finalId);
       }
