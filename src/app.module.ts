@@ -29,7 +29,7 @@ import { GraphModule } from './application/rest_api/controllers/graph/graph.modu
     CityModule,
     SearchModule,
     EntityModule,
-    GraphModule
+    GraphModule,
   ],
   controllers: [AppController],
   providers: [

@@ -1,7 +1,7 @@
 import { IsString, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateEntityDto { 
+export class CreateEntityDto {
   @ApiProperty({
     description: 'Lable Name',
     default: 'India or Koti etc..',
@@ -16,5 +16,5 @@ export class CreateEntityDto {
   })
   @IsString()
   @MinLength(1)
-  type: string; 
+  type: string;
 }

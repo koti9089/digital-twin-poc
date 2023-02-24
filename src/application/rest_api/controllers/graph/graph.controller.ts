@@ -10,9 +10,7 @@ export class GraphController {
   constructor(private gremlinService: GremlinService) {}
   @Post()
   async createGraph(@Body() body: DataDto) {
-   
     for (let i = 0; i < body.vertices.length; i++) {
-     
       const verticesMap = new Map();
 
       for (let j = 0; j < body.vertices.length; j++) {
