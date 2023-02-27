@@ -9,6 +9,7 @@ import { DomainEntity } from 'src/domain/entities/domainEntity';
 import { DomainEntityMapper } from '../../mappers/domainentity.mapper';
 import { GremlinService } from '../gremlin.service';
 import { query } from 'express';
+import { CreateEntityDto } from 'src/application/rest_api/controllers/entity/dto/create-entity.dto';
 
 @Injectable()
 export class EntityRepository {
@@ -98,6 +99,14 @@ export class EntityRepository {
       throw new NotFoundException('id not found');
     }
     return vers;
+  }
+
+  async updateEntity(id: string, updateBody: CreateEntityDto) {
+    await this.getEntity(id, updateBody.type);
+    await this.gremlinService.execute(
+      `g.V('${id}').hasLabel('${updateBody.type}').property('name', '${updateBody.name}')`,
+    );
+    return 'Updated';
   }
 
   async deleteEntity(id: string) {

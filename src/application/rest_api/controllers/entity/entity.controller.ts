@@ -54,6 +54,11 @@ export class EntityController {
     }
   }
 
+  @Put('/:id')
+  async updateEntity(@Param('id') id: string, @Body() body: CreateEntityDto) {
+    return this.entityRepo.updateEntity(id, body);
+  }
+
   @Delete('/:id')
   async deleteEntity(@Param('id') id: string) {
     return this.entityRepo.deleteEntity(id);
