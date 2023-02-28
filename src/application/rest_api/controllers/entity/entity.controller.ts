@@ -52,10 +52,15 @@ export class EntityController {
     @Param('relationDirection') relationDirection: string,
     @Param('id') id: string,
   ) {
-    if (relationDirection == 'in') {
-      return this.entityRepo.getEntityInWordRelationShips(id);
-    } else if (relationDirection == 'out') {
-      return this.entityRepo.getEntityOutWordRelationShips(id);
+    switch (relationDirection) {
+      case 'in':
+        return this.entityRepo.getEntityInWardRelationShips(id);
+      case 'out':
+        return this.entityRepo.getEntityOutWardRelationShips(id);
+      case 'both':
+        return this.entityRepo.getEntityInOutWardRelationShips(id);
+      default:
+        throw new Error(`Invalid relation direction: ${relationDirection}`);
     }
   }
 
