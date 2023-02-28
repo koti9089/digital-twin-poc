@@ -17,12 +17,12 @@ import { DataDto } from './../graph/dtos/create-graph.dto';
 import { CreateEntityRelationshipDto } from './dto/create-entity-relationship.dto';
 
 @ApiTags('Entity')
-@Controller('entity')
+@Controller()
 export class EntityController {
   constructor(private entityRepo: EntityRepository) {}
 
   @Serialize(EntityDto)
-  @Post()
+  @Post('createEntity')
   async createCountry(@Body() body: CreateEntityDto) {
     const entity = DomainEntity.create(body);
     const result = await this.entityRepo.createEntity(entity);
@@ -30,7 +30,7 @@ export class EntityController {
   }
 
   @Serialize(EntityDto)
-  @Get('/:id/:type')
+  @Get('getEntityByIdAndType/:id/:type')
   async getEntity(@Param('id') id: string, @Param('type') type: string) {
     return this.entityRepo.getEntity(id, type);
   }
@@ -42,7 +42,7 @@ export class EntityController {
   }
 
   // clashes with /:id/:type prefic relation is important
-  @Get('relation/:relationDirection/:id')
+  @Get('getEntityRelation/:relationDirection/:id')
   async getEntityRelationShips(
     @Param('relationDirection') relationDirection: string,
     @Param('id') id: string,
@@ -54,17 +54,17 @@ export class EntityController {
     }
   }
 
-  @Put('/:id')
+  @Put('updateById/:id')
   async updateEntity(@Param('id') id: string, @Body() body: CreateEntityDto) {
     return this.entityRepo.updateEntity(id, body);
   }
 
-  @Delete('/:id')
+  @Delete('deleteById/:id')
   async deleteEntity(@Param('id') id: string) {
     return this.entityRepo.deleteEntity(id);
   }
 
-  @Put('/create-relationship/:from_node_id/:to_node_id')
+  @Put('/createRelationship/:from_node_id/:to_node_id')
   async createRelationShip(@Body() body: CreateEntityRelationshipDto) {
     await this.entityRepo.createRelationship(
       body.from_node_id,
