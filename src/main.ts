@@ -8,7 +8,7 @@ async function bootstrap() {
     .setTitle('digital-twin-poc')
     .setDescription('Api for Buildings Crud (gremlin-api)')
     .setVersion('1.0')
-    .addTag('Airport')
+    .addTag('Country')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
