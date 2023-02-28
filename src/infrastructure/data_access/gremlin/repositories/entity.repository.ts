@@ -82,7 +82,7 @@ export class EntityRepository {
     }
   }
 
-  async getEntityInWordRelationShips(id: string) {
+  async getEntityInWardRelationShips(id: string) {
     const query = `g.V('${id}').inE().project('edge_id', 'edge_label', 'from_id', 'to_id').by(id).by(label).by(inV().id()).by(outV().id())`;
     const vers = await this.gremlinService.execute(query);
     if (!vers._items.length) {
@@ -91,8 +91,17 @@ export class EntityRepository {
     return vers;
   }
 
-  async getEntityOutWordRelationShips(id: string) {
+  async getEntityOutWardRelationShips(id: string) {
     const query = `g.V('${id}').outE().project('edge_id', 'edge_label', 'from_id', 'to_id').by(id).by(label).by(inV().id()).by(outV().id())`;
+    const vers = await this.gremlinService.execute(query);
+    if (!vers._items.length) {
+      throw new NotFoundException('id not found');
+    }
+    return vers;
+  }
+
+  async getEntityInOutWardRelationShips(id: string) {
+    const query = `g.V('${id}').bothE().project('edge_id', 'edge_label', 'from_id', 'to_id').by(id).by(label).by(inV().id()).by(outV().id())`;
     const vers = await this.gremlinService.execute(query);
     if (!vers._items.length) {
       throw new NotFoundException('id not found');
