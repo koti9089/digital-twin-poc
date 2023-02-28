@@ -8,7 +8,6 @@ import { DataDto } from 'src/application/rest_api/controllers/graph/dtos/create-
 import { DomainEntity } from 'src/domain/entities/domainEntity';
 import { DomainEntityMapper } from '../../mappers/domainentity.mapper';
 import { GremlinService } from '../gremlin.service';
-import { query } from 'express';
 import { CreateEntityDto } from 'src/application/rest_api/controllers/entity/dto/create-entity.dto';
 
 @Injectable()
