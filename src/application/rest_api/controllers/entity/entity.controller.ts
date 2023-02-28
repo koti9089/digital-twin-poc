@@ -15,11 +15,16 @@ import { DomainEntity } from 'src/domain/entities/domainEntity';
 import { CreateEntityDto } from './dto/create-entity.dto';
 import { DataDto } from './../graph/dtos/create-graph.dto';
 import { CreateEntityRelationshipDto } from './dto/create-entity-relationship.dto';
+import { SearchRepository } from 'src/infrastructure/data_access/gremlin/repositories/search.repository';
+import { SearchQueryDto } from '../search/dtos/serach-query.dto';
 
 @ApiTags('Entity')
 @Controller()
 export class EntityController {
-  constructor(private entityRepo: EntityRepository) {}
+  constructor(
+    private entityRepo: EntityRepository,
+    private readonly serachRepo: SearchRepository,
+  ) {}
 
   @Serialize(EntityDto)
   @Post('createEntity')
@@ -78,6 +83,11 @@ export class EntityController {
   @Delete('relation/:of')
   async deleteRelationship(@Param('of') of: string) {
     return this.entityRepo.deleteRelationship(of);
+  }
+
+  @Post('search')
+  async searchHierarchy(@Body() body: SearchQueryDto) {
+    return this.serachRepo.searchHierarchy(body);
   }
 
   // genericSearch() : inputJson(){ nodeid, relation , expected node name)

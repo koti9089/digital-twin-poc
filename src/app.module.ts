@@ -5,14 +5,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 // import { AirportModule } from './application/rest_api/controllers/airport/airport.module';
 import { GremlinService } from './infrastructure/data_access/gremlin/gremlin.service';
-import { TerminalModule } from './application/rest_api/controllers/terminal/terminal.module';
-import { RoomModule } from './application/rest_api/controllers/room/room.module';
-import { IotDeviceModule } from './application/rest_api/controllers/iot_device/iot_device.module';
-import { CountryModule } from './application/rest_api/controllers/country/country.module';
-import { StateModule } from './application/rest_api/controllers/state/state.module';
-import { CityModule } from './application/rest_api/controllers/city/city.module';
+// import { TerminalModule } from './application/rest_api/controllers/terminal/terminal.module';
+// import { RoomModule } from './application/rest_api/controllers/room/room.module';
+// import { IotDeviceModule } from './application/rest_api/controllers/iot_device/iot_device.module';
+// import { CountryModule } from './application/rest_api/controllers/country/country.module';
+// import { StateModule } from './application/rest_api/controllers/state/state.module';
+// import { CityModule } from './application/rest_api/controllers/city/city.module';
 import { EntityModule } from './application/rest_api/controllers/entity/entity.module';
-import { SearchModule } from './application/rest_api/controllers/search/search.module';
+// import { SearchModule } from './application/rest_api/controllers/search/search.module';
 // import { GraphModule } from './application/rest_api/controllers/graph/graph.module';
 @Module({
   imports: [
@@ -21,13 +21,13 @@ import { SearchModule } from './application/rest_api/controllers/search/search.m
       envFilePath: '.env',
     }),
     // AirportModule,
-    TerminalModule,
-    RoomModule,
-    IotDeviceModule,
-    CountryModule,
-    StateModule,
-    CityModule,
-    SearchModule,
+    // TerminalModule,
+    // RoomModule,
+    // IotDeviceModule,
+    // CountryModule,
+    // StateModule,
+    // CityModule,
+    // SearchModule,
     EntityModule,
     // GraphModule,
   ],
